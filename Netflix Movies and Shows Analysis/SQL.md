@@ -32,9 +32,9 @@ select rating, type from
 ) as t where new_field = 1
 ```
 
-### 3 : List all movies released in a specific year (e.g.. 2020)
+### 3 : List all movies released in a specific year (e.g.. 2021)
 ```
-select * from netflix where type = 'Movie' and releasing_year = 2020;
+select * from netflix where type = 'Movie' and releasing_year = 2021;
 ```
 ### 4 : Find the top 5 countries with the most content on Netflix
 
@@ -55,9 +55,9 @@ from netflix
 where to_date(date_added, 'Month DD, YYYY') >= current_date - interval'5 years'
 ```
 
-### 7 : Find all the movies and TV Shows by director 'Rajiv Chilaka'
+### 7 : Find all the movies and TV Shows by director 'Haile Gerima'
 ```
-select * from netflix where director Ilike '%Rajiv Chilaka%'
+select * from netflix where director Ilike '%Haile Gerima%'
 ```
 
 ### 8 : Count the number of content items in each genre
@@ -74,7 +74,7 @@ select * from netflix where type = 'TV Show' and split_part(duration, ' ', 1)::n
 
 ```
 
-### 10 : Find each year and the average numbers of content release by India on netflix
+### 10 : Find each year and the average numbers of content release by United States on netflix
 ### Return top 5 years wiht highest avg content release.
 ```
 select 
@@ -82,7 +82,7 @@ extract(year from to_date(date_added, 'Month DD, YYYY')) as date,
 count(*) as Total_Count,
 round(count(*)::numeric / (select count(*) from netflix where country = 'India') * 100::numeric, 2) as average
 from netflix
-where country = 'India'
+where country = 'United States'
 group by 1
 order by 3 desc
 limit 5
